@@ -35,6 +35,20 @@ func If(b bool, msg string, exitCode int) {
 	}
 }
 
+// exit.If b is true
+func IfErr(b bool, err error, exitCode int) {
+
+	if b {
+		w := assignWriter(exitCode)
+
+		if msg != "" {
+			fmt.Fprintf(w, "%v\n", err)
+		}
+
+		os.Exit(exitCode)
+	}
+}
+
 // exit.Unless b is true
 func Unless(b bool, msg string, exitCode int) {
 
