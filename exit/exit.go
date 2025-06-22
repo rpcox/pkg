@@ -39,13 +39,13 @@ func If(b bool, msg string, exitCode int) {
 func Unless(b bool, msg string, exitCode int) {
 
 	if !b {
-		w := assignWriter(code)
+		w := assignWriter(exitCode)
 
 		if msg != "" {
 			fmt.Fprintf(w, "%s\n", msg)
 		}
 
-		os.Exit(code)
+		os.Exit(exitCode)
 	}
 }
 
