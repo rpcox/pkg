@@ -40,11 +40,7 @@ func IfErr(b bool, err error, exitCode int) {
 
 	if b {
 		w := assignWriter(exitCode)
-
-		if msg != "" {
-			fmt.Fprintf(w, "%v\n", err)
-		}
-
+		fmt.Fprintf(w, "%v\n", err)
 		os.Exit(exitCode)
 	}
 }
