@@ -36,9 +36,9 @@ func If(b bool, msg string, exitCode int) {
 }
 
 // exit.If b is true
-func IfErr(b bool, err error, exitCode int) {
+func IfErr(err error, exitCode int) {
 
-	if b {
+	if err != nil {
 		w := assignWriter(exitCode)
 		fmt.Fprintf(w, "%v\n", err)
 		os.Exit(exitCode)
@@ -68,8 +68,8 @@ func AndLogError(err error, exitCode int) {
 
 // exit.AndWriteError will send the error message to stderr and exit with
 // the specified exitCode
-func AndWriteError(err error, exitCode int) {
-	fmt.Fprintf(os.Stderr, "%v\n", err)
+func AndWriteError(err error, fh *os.File, exitCode int) {
+	fmt.Fprintf(fh, "%v\n", err)
 	os.Exit(exitCode)
 }
 
