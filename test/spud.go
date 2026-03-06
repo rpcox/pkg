@@ -5,7 +5,7 @@ import (
 )
 
 var (
-	i int = 1
+	i int = 2
 )
 
 func TestPrint() {
