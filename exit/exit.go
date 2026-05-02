@@ -9,7 +9,7 @@ import (
 )
 
 const tool = "pkg-exit"
-const version = `v0.3.5`
+const version = `v0.3.6`
 
 func GetVersion() string {
 	return fmt.Sprintf("%s %s", tool, version)
@@ -33,7 +33,7 @@ func If(b bool, err error, exitCode int) {
 
 	if b {
 		w := assignWriter(exitCode)
-		fmt.Fprintf(w, "%s\n", msg)
+		fmt.Fprintf(w, "%v\n", err)
 		os.Exit(exitCode)
 	}
 }
@@ -52,7 +52,7 @@ func Unless(b bool, err error, exitCode int) {
 
 	if !b {
 		w := assignWriter(exitCode)
-		fmt.Fprintf(w, "%s\n", msg)
+		fmt.Fprintf(w, "%v\n", err)
 		os.Exit(exitCode)
 	}
 }
