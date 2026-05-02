@@ -8,6 +8,13 @@ import (
 	"os"
 )
 
+const tool = "pkg-exit"
+const version = `v0.3.5`
+
+func GetVersion() string {
+	return fmt.Sprintf("%s %s", tool, version)
+}
+
 // Determine which io.Writer to use based on exitCode. All non-zero exitCodes
 // return io.Stderr.
 func assignWriter(exitCode int) io.Writer {
@@ -22,22 +29,17 @@ func assignWriter(exitCode int) io.Writer {
 }
 
 // exit.If b is true
-func If(b bool, msg string, exitCode int) {
+func If(b bool, err error, exitCode int) {
 
 	if b {
 		w := assignWriter(exitCode)
-
-		if msg != "" {
-			fmt.Fprintf(w, "%s\n", msg)
-		}
-
+		fmt.Fprintf(w, "%s\n", msg)
 		os.Exit(exitCode)
 	}
 }
 
 // exit.If b is true
 func IfErr(err error, exitCode int) {
-
 	if err != nil {
 		w := assignWriter(exitCode)
 		fmt.Fprintf(w, "%v\n", err)
@@ -46,15 +48,11 @@ func IfErr(err error, exitCode int) {
 }
 
 // exit.Unless b is true
-func Unless(b bool, msg string, exitCode int) {
+func Unless(b bool, err error, exitCode int) {
 
 	if !b {
 		w := assignWriter(exitCode)
-
-		if msg != "" {
-			fmt.Fprintf(w, "%s\n", msg)
-		}
-
+		fmt.Fprintf(w, "%s\n", msg)
 		os.Exit(exitCode)
 	}
 }
